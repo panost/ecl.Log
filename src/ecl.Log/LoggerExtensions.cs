@@ -1,10 +1,6 @@
 ﻿using System;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ecl.Log.File;
 using ecl.Log.Format;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace ecl.Log {
     public static class LoggerExtensions {

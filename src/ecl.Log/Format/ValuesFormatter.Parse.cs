@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ecl.Log.Format {
     partial class ValuesFormatter {
-        struct MessageTemplateParser {
+        struct Parser {
             private string _message;
             private int _index;
             private int _length;
             private StringBuilder _rawBuffer;
-            private List<FormattingSegment> list;
+            private List<Segment> list;
             private List<string> names;
 
             private int _maxIndex;
@@ -30,7 +30,7 @@ namespace ecl.Log.Format {
                     return Math.Max( _maxIndex+1, names.Count );
                 }
             }
-            public FormattingSegment[] Segments {
+            public Segment[] Segments {
                 get {
                     return list.ToArray();
                 }
@@ -84,7 +84,7 @@ namespace ecl.Log.Format {
                     _maxIndex = segIndex;
                 }
                 if ( _alignMode != Alignment.None ) {
-                    FormattingSegment seg;
+                    Segment seg;
                     seg.Format = _format;
                     seg.Index = (short)segIndex;
                     seg.Type = _mode;
@@ -114,7 +114,7 @@ namespace ecl.Log.Format {
                 _message = message;
                 _index = 0;
                 _length = message.Length;
-                list = new List<FormattingSegment>();
+                list = new List<Segment>();
                 names = new List<string>();
                 _rawBuffer = new StringBuilder();
                 _maxIndex = -1;
@@ -131,14 +131,14 @@ namespace ecl.Log.Format {
                     _rawBuffer.Clear();
 
                     if ( segUpNow.Length > 0 ) {
-                        list.Add( new FormattingSegment( segUpNow ) );
+                        list.Add( new Segment( segUpNow ) );
                     }
                     if ( !AddSegment() ) {
                         return false;
                     }
                 }
                 if ( _rawBuffer.Length > 0 ) {
-                    list.Add( new FormattingSegment( _rawBuffer.ToString() ) );
+                    list.Add( new Segment( _rawBuffer.ToString() ) );
                 }
                 return true;
             }

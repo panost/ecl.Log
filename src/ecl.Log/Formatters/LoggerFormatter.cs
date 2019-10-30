@@ -11,6 +11,9 @@ using ecl.Log.Types;
 using Microsoft.Extensions.Logging;
 
 namespace ecl.Log.Formatters {
+    /// <summary>
+    /// The default formatter
+    /// </summary>
     public class LoggerFormatter {
         protected readonly FormatterSettings Settings;
         public readonly Logger Logger;
